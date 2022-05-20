@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        td {
+            white-space: pre;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #baf5b8;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Poke Battle - Choose your Pokemon</title>
+</head>
+<body>
+
+<div class="center">
+    <h2>CHOOSE YOUR POKEMON</h2>
+
+    <form action="#" th:action="@{/battle}" th:object="${battle}" method="post">
+        <table class="center">
+            <tr>
+                <th>P1</th>
+                <th>POKEMON
+                    <br>
+                    (height in decimetres / weight in hectograms)
+                </th>
+                <th>P2</th>
+            </tr>
+            <tr th:each="pokemon : ${pokemonList}">
+                <td><input type="radio" th:value="${pokemon.getId()}" name="id1" required></td>
+                <td th:text="${pokemon.getListDescription()}"></td>
+                <td><input type="radio" th:value="${pokemon.getId()}" name="id2" required></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Fight!">
+    </form>
+</div>
+
+</body>
+</html>

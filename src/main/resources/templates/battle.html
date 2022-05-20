@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        p {
+            white-space: pre;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .column {
+            float: left;
+        }
+
+        .left {
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            width: 35%;
+        }
+
+        .right {
+            width: 35%;
+        }
+
+        .middle {
+            width: 30%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .sticky {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 10%;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Poke Battle - Battle</title>
+</head>
+<body>
+
+<div th:object="${battle}" class="center">
+    <h2>BEGIN BATTLE!</h2>
+
+    <div class="row">
+        <div class="column left sticky">
+            <img th:src="*{getPlayer1().getArtwork()}" alt="Player 1's pokemon"/>
+        </div>
+        <div class="column middle">
+            <p th:text="*{getFightLog()}"></p>
+        </div>
+        <div class="column right sticky">
+            <img th:src="*{getPlayer2().getArtwork()}" alt="Player 2's pokemon"/>
+        </div>
+    </div>
+
+
+    <br><br><br>
+
+    <form action="#" th:action="@{/battle}" method="post">
+        <input type="hidden" th:value="*{getId1()}" name="id1">
+        <input type="hidden" th:value="*{getId2()}" name="id2">
+        <input type="submit" value="Retry Battle!">
+    </form>
+
+    <br>
+
+    <form action="#" th:action="@{/select}" method="get">
+        <input type="submit" value="Select new pokemon!">
+    </form>
+
+</div>
+
+</body>
+</html>
